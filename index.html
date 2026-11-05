@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101923">
+  <meta name="description" content="Sua biblioteca pessoal de jogos, em uma interface inspirada nas lojas de jogos para PC.">
+  <title>PLAYDECK — sua biblioteca de jogos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#inicio" aria-label="Playdeck início">
+        <span class="brand-mark">P</span>
+        <span class="brand-name">PLAY<span>DECK</span></span>
+      </a>
+
+      <div class="sidebar-label">MENU</div>
+      <nav class="side-nav" aria-label="Navegação principal">
+        <button class="nav-link active" data-view="discover"><span class="nav-icon">▦</span> Descobrir</button>
+        <button class="nav-link" data-view="library"><span class="nav-icon">▤</span> Minha biblioteca <span class="nav-count" id="libraryCount">0</span></button>
+        <button class="nav-link" data-view="favorites"><span class="nav-icon">♡</span> Favoritos</button>
+      </nav>
+
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-heading-row">
+        <span class="sidebar-label">GÊNEROS</span>
+        <span class="tiny-dots">•••</span>
+      </div>
+      <nav class="side-nav genre-nav" id="genreNav" aria-label="Filtrar por gênero">
+        <button class="nav-link active" data-genre="all"><span class="genre-dot all-dot"></span> Todos os jogos</button>
+        <button class="nav-link" data-genre="Ação"><span class="genre-dot action-dot"></span> Ação</button>
+        <button class="nav-link" data-genre="Aventura"><span class="genre-dot adventure-dot"></span> Aventura</button>
+        <button class="nav-link" data-genre="RPG"><span class="genre-dot rpg-dot"></span> RPG</button>
+        <button class="nav-link" data-genre="Corrida"><span class="genre-dot racing-dot"></span> Corrida</button>
+        <button class="nav-link" data-genre="Estratégia"><span class="genre-dot strategy-dot"></span> Estratégia</button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="storage-card">
+          <div class="storage-icon">⌁</div>
+          <div>
+            <strong>Sua coleção</strong>
+            <span id="storageText">Seus jogos em um só lugar</span>
+          </div>
+        </div>
+        <div class="sidebar-footer">PLAYDECK <span>·</span> 1.0</div>
+      </div>
+    </aside>
+
+    <main class="main-content" id="inicio">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Abrir menu">☰</button>
+        <div class="breadcrumbs"><span>INÍCIO</span><b>/</b><strong id="breadcrumbCurrent">DESCOBRIR</strong></div>
+        <div class="top-actions">
+          <label class="search-box" for="searchInput">
+            <span>⌕</span>
+            <input id="searchInput" type="search" placeholder="Buscar jogos..." autocomplete="off">
+            <kbd>⌘ K</kbd>
+          </label>
+          <button class="icon-button" id="exportButton" title="Exportar biblioteca" aria-label="Exportar biblioteca">⇧</button>
+          <button class="icon-button" id="importButton" title="Importar biblioteca" aria-label="Importar biblioteca">⇩</button>
+          <button class="profile-avatar" title="Perfil">G</button>
+        </div>
+      </header>
+
+      <div class="page-wrap">
+        <section class="welcome-row">
+          <div>
+            <div class="eyebrow"><span class="live-dot"></span> SUA CENTRAL DE JOGOS</div>
+            <h1 id="pageTitle">Descubra seu próximo <span>jogo favorito.</span></h1>
+            <p id="pageSubtitle">Organize sua coleção, acompanhe o que quer jogar e deixe tudo no seu estilo.</p>
+          </div>
+          <button class="primary-button" id="addGameButton"><span>＋</span> Adicionar jogo</button>
+        </section>
+
+        <section class="hero-section" id="heroSection" aria-label="Jogo em destaque">
+          <div class="hero-art" id="heroArt"></div>
+          <div class="hero-overlay"></div>
+          <div class="hero-content">
+            <div class="hero-kicker"><span class="featured-tag">EM DESTAQUE</span><span class="hero-platform" id="heroPlatform">PC</span></div>
+            <h2 id="heroTitle">Cyberpunk 2077</h2>
+            <p id="heroDescription">Explore Night City, uma megalópole obcecada por poder, glamour e modificações corporais.</p>
+            <div class="hero-bottom">
+              <div class="hero-meta"><span class="hero-stars">★</span> <span id="heroGenre">RPG · Mundo aberto</span></div>
+              <button class="hero-button" id="heroAction">Ver jogo <span>↗</span></button>
+            </div>
+          </div>
+          <div class="hero-pagination"><span class="pagination-active"></span><span></span><span></span></div>
+        </section>
+
+        <section class="stats-row" aria-label="Resumo da biblioteca">
+          <div class="stat-card"><div class="stat-icon blue">▤</div><div><span class="stat-label">NA BIBLIOTECA</span><strong id="statTotal">06</strong></div></div>
+          <div class="stat-card"><div class="stat-icon green">▶</div><div><span class="stat-label">INSTALADOS</span><strong id="statInstalled">03</strong></div></div>
+          <div class="stat-card"><div class="stat-icon pink">♡</div><div><span class="stat-label">FAVORITOS</span><strong id="statFavorites">02</strong></div></div>
+          <div class="stat-message"><span class="sparkle">✦</span><span>Seu próximo grande jogo<br><strong>está a um clique de distância.</strong></span></div>
+        </section>
+
+        <section class="games-section">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow">SUA COLEÇÃO</div>
+              <h2 id="gamesHeading">Jogos em destaque</h2>
+            </div>
+            <div class="section-controls">
+              <div class="filter-tabs" role="group" aria-label="Filtrar jogos">
+                <button class="filter-tab active" data-filter="all">Todos</button>
+                <button class="filter-tab" data-filter="installed">Instalados</button>
+                <button class="filter-tab" data-filter="backlog">Quero jogar</button>
+              </div>
+              <select id="sortSelect" aria-label="Ordenar jogos">
+                <option value="recent">Mais recentes</option>
+                <option value="name">Nome A–Z</option>
+                <option value="genre">Gênero</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="games-grid" id="gamesGrid"></div>
+          <div class="empty-state" id="emptyState" hidden>
+            <div class="empty-icon">⌕</div>
+            <h3>Nenhum jogo encontrado</h3>
+            <p>Tente mudar a pesquisa ou adicione um novo jogo à sua coleção.</p>
+            <button class="secondary-button" id="emptyAddButton">＋ Adicionar jogo</button>
+          </div>
+        </section>
+        <footer class="main-footer"><span>PLAYDECK</span> — feito para quem ama jogar. <span class="footer-right">Seus dados ficam salvos neste navegador.</span></footer>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal de cadastro/edição -->
+  <div class="modal-backdrop" id="gameModal" aria-hidden="true">
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-header">
+        <div><div class="eyebrow">SUA COLEÇÃO</div><h2 id="modalTitle">Adicionar jogo</h2></div>
+        <button class="close-button" data-close="gameModal" aria-label="Fechar">×</button>
+      </div>
+      <form id="gameForm">
+        <input type="hidden" id="gameId">
+        <label class="form-label">Nome do jogo <span>*</span><input id="gameName" maxlength="60" required placeholder="Ex.: Red Dead Redemption 2"></label>
+        <div class="form-grid">
+          <label class="form-label">Gênero<select id="gameGenre"><option>Ação</option><option>Aventura</option><option>RPG</option><option>Corrida</option><option>Estratégia</option><option>Simulação</option><option>Esporte</option><option>Terror</option><option>Outro</option></select></label>
+          <label class="form-label">Plataforma<select id="gamePlatform"><option>PC</option><option>PlayStation</option><option>Xbox</option><option>Nintendo</option><option>Mobile</option><option>Outra</option></select></label>
+        </div>
+        <label class="form-label">Status<select id="gameStatus"><option value="installed">Instalado</option><option value="backlog">Quero jogar</option><option value="owned">Na biblioteca</option></select></label>
+        <label class="form-label">URL da capa <input id="gameCover" type="url" placeholder="https://... (opcional)"></label>
+        <label class="form-label upload-label">Ou escolha uma imagem do computador <input id="gameCoverFile" type="file" accept="image/png,image/jpeg,image/webp"></label>
+        <label class="form-label">Link do jogo <input id="gameLink" type="url" placeholder="https://store.steampowered.com/... (opcional)"></label>
+        <label class="form-label">Descrição <textarea id="gameDescription" rows="3" maxlength="240" placeholder="Uma breve descrição do jogo..."></textarea></label>
+        <label class="favorite-check"><input id="gameFavorite" type="checkbox"> <span>♡</span> Marcar como favorito</label>
+        <div class="form-error" id="formError" role="alert"></div>
+        <div class="modal-actions"><button type="button" class="secondary-button" data-close="gameModal">Cancelar</button><button class="primary-button" type="submit">Salvar jogo <span>→</span></button></div>
+      </form>
+    </section>
+  </div>
+
+  <!-- Modal de detalhes -->
+  <div class="modal-backdrop" id="detailModal" aria-hidden="true">
+    <section class="detail-modal" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+      <button class="close-button detail-close" data-close="detailModal" aria-label="Fechar">×</button>
+      <div class="detail-cover" id="detailCover"></div>
+      <div class="detail-body">
+        <div class="eyebrow">DETALHES DO JOGO</div>
+        <h2 id="detailTitle"></h2>
+        <div class="detail-tags" id="detailTags"></div>
+        <p id="detailDescription"></p>
+        <div class="detail-actions"><button class="primary-button" id="detailOpenButton">Abrir página <span>↗</span></button><button class="secondary-button" id="detailEditButton">Editar</button><button class="danger-button" id="detailDeleteButton">Excluir</button></div>
+      </div>
+    </section>
+  </div>
+
+  <input id="importFile" type="file" accept="application/json,.json" hidden>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
